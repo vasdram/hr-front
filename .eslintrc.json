@@ -1,3 +1,131 @@
+//{
+//  "extends": "next/core-web-vitals"
+//}
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "plugins": ["import", "@typescript-eslint", "prettier", "simple-import-sort"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "parserOptions": { "project": ["./tsconfig.json"] }
+    }
+  ],
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "eslint:recommended",
+    "prettier",
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": ["*.ts", "*.tsx"]
+    },
+    "import/resolver": {
+      "typescript": { "project": "./tsconfig.json" }
+    }
+  },
+  "rules": {
+    // eslint
+
+    "no-void": "off",
+    "camelcase": "off",
+    "semi": [1, "always"],
+    "no-else-return": "off",
+    "no-unused-vars": "off",
+    "no-nested-ternary": "off",
+    "no-use-before-define": "off",
+    "nonblock-statement-body-position": ["error", "below"],
+    "no-console": ["error", { "allow": ["warn", "error", "info"] }],
+    "id-length": ["error", { "exceptions": ["t", "i", "j", "_"], "properties": "never" }],
+    "no-restricted-syntax": ["error", "IfStatement > ExpressionStatement > AssignmentExpression"],
+    "no-restricted-imports": ["error", { "paths": ["dist"] }],
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": ["multiline-block-like", "multiline-expression", "multiline-const", "multiline-let"]
+      },
+      {
+        "blankLine": "always",
+        "prev": ["multiline-block-like", "multiline-expression", "multiline-const", "multiline-let"],
+        "next": "*"
+      }
+    ],
+
+    // import
+
+    "import/extensions": "off",
+    "import/no-unresolved": "error",
+    "import/no-dynamic-require": "off",
+    "import/prefer-default-export": "off",
+
+    // simple-import-sort
+
+    "simple-import-sort/exports": "error",
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          // Packages. `react` related packages come first.
+          ["^react", "^\\w", "^@[^//]"],
+          // Internal packages.
+          ["^src/"],
+          // Parent imports. Put `..` last.
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          // Other relative imports. Put same-folder imports and `.` last.
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$", "^\\./?.types$"],
+          // Style imports.
+          ["^.+\\.s?css$"]
+        ]
+      }
+    ],
+
+    // @typescript-eslint
+
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/array-type": ["error", { "default": "generic" }],
+    "@typescript-eslint/no-explicit-any": ["error", { "ignoreRestArgs": false }],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/consistent-type-imports": "error",
+
+    // jsx-a11y
+
+    "jsx-a11y/control-has-associated-label": "off",
+
+    // react
+
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
+  }
 }
